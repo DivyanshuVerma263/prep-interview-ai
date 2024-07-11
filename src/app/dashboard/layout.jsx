@@ -1,8 +1,12 @@
 import React from 'react'
+import Navbar from './_components/Navbar'
 
 function DashboardLayout({children}) {
   return (
-    <div>{children}</div>
+    <div>
+      <Navbar />
+      {children}
+    </div>
   )
 }
 

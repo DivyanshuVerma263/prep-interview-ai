@@ -7,12 +7,14 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Prep Interview AI",
   description: "Interview Preparation Website using AI",
+  icons: {
+    icon: "/image.png",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-
       <html lang="en" className="dark">
         <body className={inter.className}>{children}</body>
       </html>

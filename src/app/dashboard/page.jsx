@@ -4,7 +4,7 @@ import React from 'react'
 function Dashboard() {
   return (
     <div>
-      <UserButton></UserButton>
+      Dashboard
     </div>
   )
 }
