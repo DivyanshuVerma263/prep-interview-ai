@@ -8,7 +8,7 @@ export const metadata = {
   title: "Prep Interview AI",
   description: "Interview Preparation Website using AI",
   icons: {
-    icon: "/image.png",
+    icon: "/logo.png",
   },
 };
 

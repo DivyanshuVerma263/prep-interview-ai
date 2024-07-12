@@ -23,7 +23,7 @@ function Navbar() {
                 {nav ? <AiOutlineMenu size={20} /> : <AiOutlineClose size={20} />}
             </div>
 
-            <Image src={'/image.png'} width={40} height={40} alt="logo" className='ml-2' />
+            <Image src={'/logo.png'} width={40} height={40} alt="logo" className='ml-2' />
 
             <ul className='hidden md:flex md:gap-6 lg:gap-12'>
                 <li className={`text-xl hover:text-primary hover:font-bold transition-all cursor-pointer ${path == '/dashboard' && "text-primary font-bold"}`}>Dashboard</li>

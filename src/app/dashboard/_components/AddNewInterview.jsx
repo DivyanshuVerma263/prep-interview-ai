@@ -18,6 +18,7 @@ import {v4 as uuidv4} from 'uuid';
 import { useUser } from '@clerk/nextjs';
 import moment from 'moment';
 import { Interview } from '@/helpers/schema';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -29,6 +30,7 @@ function AddNewInterview() {
     const [loading, setLoading] = useState(false);
     const [responseFromGeminiAI,setResponseFromGeminiAI]=useState([]);
     const {user}=useUser();
+    const router=useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,6 +45,7 @@ function AddNewInterview() {
         console.log('first',data);
         console.log('second',JSON.parse(data));
         setResponseFromGeminiAI(data);
+
         if(data){
             const resp=await db.insert(Interview)
             .values({
@@ -56,7 +59,10 @@ function AddNewInterview() {
         }).returning({
             interviewId:Interview.interviewId
         })
-        
+        if(resp){
+            setOpenDialog(false);
+            router.push('/dashboard/interview/'+resp[0]?.interviewId)
+        }        
         console.log('Interview ID:',resp);
     }
     else {
