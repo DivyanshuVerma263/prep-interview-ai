@@ -20,25 +20,15 @@ function InterviewPage({ params }) {
             const result = await db.select().from(Interview)
                 .where(eq(Interview.interviewId, params.interviewId));
 
-            // console.log(result[0]);
             setInterviewData(result[0]);
         } catch (error) {
             console.log(error);
         }
     }
 
-    const handleButton = () => {
-        setEnableCamera(!enableCamera);
-    }
-
-
     useEffect(() => {
         getInterviewDetails();
     }, [params.interviewId]);
-
-    // useEffect(() => {
-    //     console.log('Updated interviewData:', interviewData);
-    // }, [interviewData]);
 
     return (
         <div className='my-10'>
@@ -56,7 +46,6 @@ function InterviewPage({ params }) {
 
                     <div className='p-5 border rounded-lg border-yellow-300 bg-yellow-100 dark:bg-transparent'>
                         <h2 className='flex gap-2 items-center text-yellow-500'>
-                            {/* <Lightbulb color="" /> */}
                             <Lightbulb className='dark:text-noteyellow' />
                             <strong>Note:</strong>
                         </h2>
@@ -71,26 +60,30 @@ function InterviewPage({ params }) {
                         <Webcam
                             onUserMedia={() => setEnableCamera(true)}
                             onUserMediaError={() => setEnableCamera(false)}
-                            // style={{ height: 450, width: 450 }}
                             className='h-72 w-full my-7'
                             mirrored={true}
                         />
-                        : <>
+                        : 
+                        <>
                             <WebcamIcon className='h-72 w-full p-20 bg-secondary rounded-lg border my-7' />
                         </>
                     }
-                    <Button className='w-full ' onClick={handleButton}>
+
+                    <Button className='w-full ' onClick={() => setEnableCamera(!enableCamera)}>
                         {!enableCamera ? "Enable Webcam and Microphone" : "Disable Webcam"}
                     </Button>
+
                 </div>
 
             </div>
+
 
             <div className='flex justify-end items-end'>
                 <Link href={'/dashboard/interview/' + params.interviewId + '/start'}>
                     <Button>Start Interview</Button>
                 </Link>
             </div>
+
         </div>
     )
 }

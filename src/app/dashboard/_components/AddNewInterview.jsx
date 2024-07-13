@@ -14,7 +14,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { chatSession } from '@/helpers/GeminiAIModal';
 import { LoaderCircle } from 'lucide-react';
 import { db } from '@/helpers/db';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { useUser } from '@clerk/nextjs';
 import moment from 'moment';
 import { Interview } from '@/helpers/schema';
@@ -28,54 +28,47 @@ function AddNewInterview() {
     const [jobDescription, setJobDescription] = useState(false);
     const [jobExperience, setJobExperience] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [responseFromGeminiAI,setResponseFromGeminiAI]=useState([]);
-    const {user}=useUser();
-    const router=useRouter();
+    const [responseFromGeminiAI, setResponseFromGeminiAI] = useState([]);
+    const { user } = useUser();
+    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        // console.log(jobPosition,jobDescription,jobExperience);
 
         const inputPrompt = "Job Position: " + jobPosition + ",Job Description: " + jobDescription + ",Years of experience: " + jobExperience + ". For the information provided, please give me 5 interview questions along with answers in JSON format. Give question and answer as field in JSON only."
 
         const jsonResponse = await chatSession.sendMessage(inputPrompt);
-        // const checkdata=await jsonResponse.response.text();
-        // console.log('initial',checkdata);
-        const data = await jsonResponse.response.text().replace('```json','').replace(/```[\s\S]*$/, '');
-        // data=data.;
-        console.log(data);
-        // console.log('second',JSON.parse(data));
+        const data = jsonResponse.response.text().replace('```json', '').replace(/```[\s\S]*$/, '');
         setResponseFromGeminiAI(data);
 
-        if(data){
-            const resp=await db.insert(Interview)
-            .values({
-            interviewId:uuidv4(),
-            jsonInterviewResponse:data,
-            jobPosition:jobPosition,
-            jobDescription:jobDescription,
-            jobExperience:jobExperience,
-            createdBy:user?.primaryEmailAddress?.emailAddress,
-            createdAt:moment().format('DD-MM-YYYY'),
-        }).returning({
-            interviewId:Interview.interviewId
-        })
-        if(resp){
-            setOpenDialog(false);
-            router.push('/dashboard/interview/'+resp[0]?.interviewId)
-        }        
-        console.log('Interview ID:',resp);
-    }
-    else {
-        console.log('Error');
-    }
+        if (data) {
+            const resp = await db.insert(Interview)
+                .values({
+                    interviewId: uuidv4(),
+                    jsonInterviewResponse: data,
+                    jobPosition: jobPosition,
+                    jobDescription: jobDescription,
+                    jobExperience: jobExperience,
+                    createdBy: user?.primaryEmailAddress?.emailAddress,
+                    createdAt: moment().format('DD-MM-YYYY'),
+                }).returning({
+                    interviewId: Interview.interviewId
+                })
+            if (resp) {
+                setOpenDialog(false);
+                router.push('/dashboard/interview/' + resp[0]?.interviewId)
+            }
+        }
+        else {
+            console.log('Error');
+        }
         setLoading(false);
-
     }
 
     return (
         <div>
+
             <div
                 className='p-10 border rounded-lg bg-secondary hover:scale-105 hover:shadow-md cursor-pointer transition-all'
                 onClick={(e) => setOpenDialog(true)}>
@@ -90,6 +83,7 @@ function AddNewInterview() {
                             <form onSubmit={handleSubmit}>
 
                                 <div>
+
                                     <h2>Add details about job position, your skills and years of experience</h2>
 
                                     <div className='mt-7 my-3'>
@@ -104,8 +98,10 @@ function AddNewInterview() {
                                         <label>Years of Experience</label>
                                         <Input placeholder='Eg. 5' type='number' max='50' required onChange={(e) => setJobExperience(e.target.value)} />
                                     </div>
+
                                 </div>
 
+                                
                                 <div className="flex gap-5 justify-end">
                                     <Button variant='ghost' className='hover:bg-destructive' onClick={() => setOpenDialog(false)}>Cancel</Button>
                                     <Button type='submit' disabled={loading}>
@@ -113,14 +109,13 @@ function AddNewInterview() {
                                     </Button>
                                 </div>
 
+
                             </form>
                         </DialogDescription>
                     </DialogHeader>
                 </DialogContent>
             </Dialog>
-
-
-
+            
         </div>
     )
 }

@@ -14,7 +14,7 @@ import moment from 'moment';
 import Link from 'next/link'
 
 
-function RecordAnswerSection({ interviewQuestions, activeQuestionIndex, interviewData,setActiveQuestionIndex }) {
+function RecordAnswerSection({ interviewQuestions, activeQuestionIndex, interviewData, setActiveQuestionIndex }) {
     const { user } = useUser();
     const [loading, setLoading] = useState(false);
     const [userAnswer, setUserAnswer] = useState('');
@@ -91,12 +91,10 @@ function RecordAnswerSection({ interviewQuestions, activeQuestionIndex, intervie
 
     return (
         <div className=' min-h-[90%] flex flex-col items-center justify-center'>
+
             <div className='flex flex-col mt-10 justify-center items-center bg-black rounded-lg p-5 '>
                 <Image src={'/webcam.png'} width={200} height={200} className='absolute' />
                 <Webcam
-                    // onUserMedia={() => setEnableCamera(true)}
-                    // onUserMediaError={() => setEnableCamera(false)}
-                    // style={{ height: 450, width: 450 }}
                     className='h-72 w-full z-10'
                     mirrored={true}
                 />
@@ -115,15 +113,15 @@ function RecordAnswerSection({ interviewQuestions, activeQuestionIndex, intervie
             </Button>
 
             <div className='flex justify-end gap-6 '>
-                        {activeQuestionIndex > 0 &&
-                            <Button onClick={() => setActiveQuestionIndex(activeQuestionIndex - 1)}>Prev Question</Button>}
-                        {activeQuestionIndex != interviewQuestions?.length - 1 &&
-                            <Button onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}>Next Question</Button>}
-                        {activeQuestionIndex == interviewQuestions?.length - 1 &&
-                            <Link href={'/dashboard/interview/'+interviewData?.interviewId+'/feedback'}>
-                            <Button>End Interview</Button>
-                            </Link>}
-                    </div>
+                {activeQuestionIndex > 0 &&
+                    <Button onClick={() => setActiveQuestionIndex(activeQuestionIndex - 1)}>Prev Question</Button>}
+                {activeQuestionIndex != interviewQuestions?.length - 1 &&
+                    <Button onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}>Next Question</Button>}
+                {activeQuestionIndex == interviewQuestions?.length - 1 &&
+                    <Link href={'/dashboard/interview/' + interviewData?.interviewId + '/feedback'}>
+                        <Button>End Interview</Button>
+                    </Link>}
+            </div>
 
         </div>
     )
