@@ -11,3 +11,15 @@ export const Interview=pgTable('prep-interview-ai',{ //table name
     createdAt:varchar('createdAt'),
     interviewId:varchar('interviewId').notNull()
 });
+
+export const UserAnswer=pgTable('userAnswer',{ //table name
+    id:serial('id').primaryKey(),
+    interviewIdRef:varchar('interviewId').notNull(),
+    question:varchar('question').notNull(),
+    correctAns:text('correctAns'),
+    userAns:text('userAns'),
+    feedback:text('feedback'),
+    rating:varchar('rating'),
+    userEmail:varchar('userEmail'),
+    createdAt:varchar('createdAt'),
+});

@@ -20,7 +20,7 @@ function InterviewPage({ params }) {
             const result = await db.select().from(Interview)
                 .where(eq(Interview.interviewId, params.interviewId));
 
-            console.log(result[0]);
+            // console.log(result[0]);
             setInterviewData(result[0]);
         } catch (error) {
             console.log(error);

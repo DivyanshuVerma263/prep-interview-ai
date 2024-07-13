@@ -40,10 +40,12 @@ function AddNewInterview() {
         const inputPrompt = "Job Position: " + jobPosition + ",Job Description: " + jobDescription + ",Years of experience: " + jobExperience + ". For the information provided, please give me 5 interview questions along with answers in JSON format. Give question and answer as field in JSON only."
 
         const jsonResponse = await chatSession.sendMessage(inputPrompt);
-        const data = await jsonResponse.response.text().replace('```json','').replace('```', '');
+        // const checkdata=await jsonResponse.response.text();
+        // console.log('initial',checkdata);
+        const data = await jsonResponse.response.text().replace('```json','').replace(/```[\s\S]*$/, '');
         // data=data.;
-        console.log('first',data);
-        console.log('second',JSON.parse(data));
+        console.log(data);
+        // console.log('second',JSON.parse(data));
         setResponseFromGeminiAI(data);
 
         if(data){
