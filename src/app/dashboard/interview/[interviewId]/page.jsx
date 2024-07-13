@@ -4,6 +4,7 @@ import { db } from '@/helpers/db'
 import { Interview } from '@/helpers/schema'
 import { eq } from 'drizzle-orm';
 import { Lightbulb, WebcamIcon } from 'lucide-react';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import Webcam from 'react-webcam';
 
@@ -56,7 +57,7 @@ function InterviewPage({ params }) {
                     <div className='p-5 border rounded-lg border-yellow-300 bg-yellow-100 dark:bg-transparent'>
                         <h2 className='flex gap-2 items-center text-yellow-500'>
                             {/* <Lightbulb color="" /> */}
-                            <Lightbulb className='dark:text-noteyellow'/>
+                            <Lightbulb className='dark:text-noteyellow' />
                             <strong>Note:</strong>
                         </h2>
                         <h2 className='mt-3 text-yellow-500'>Information Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quod quam aliquid sunt sint? Veniam rerum inventore amet quis nisi expedita doloribus. Quae provident eligendi consectetur incidunt, hic necessitatibus sunt!</h2>
@@ -86,7 +87,9 @@ function InterviewPage({ params }) {
             </div>
 
             <div className='flex justify-end items-end'>
-                <Button>Start Interview</Button>
+                <Link href={'/dashboard/interview/' + params.interviewId + '/start'}>
+                    <Button>Start Interview</Button>
+                </Link>
             </div>
         </div>
     )
