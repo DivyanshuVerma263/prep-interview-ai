@@ -24,6 +24,7 @@ function Feedback({ params }) {
             .orderBy(UserAnswer.id);
 
         setFeedbackList(result);
+        console.log(feedbackList);
     }
 
     useEffect(() => {
@@ -44,7 +45,7 @@ function Feedback({ params }) {
                     {feedbackList && feedbackList.map((item, index) => (
                         <Collapsible key={index} className='mt-7'>
                             <CollapsibleTrigger className='w-[90%] p-2 bg-secondary rounded-lg my-2 text-left flex justify-between gap-7'>
-                                Qn{index + 1}. {item.question} <ChevronsUpDown className='h-5 w-5' />
+                                Q{index + 1}. {item.question} <ChevronsUpDown className='h-5 w-5' />
                             </CollapsibleTrigger>
                             <CollapsibleContent >
                                 <div className='w-[90%] px-10 pt-3 pb-5 flex flex-col gap-2 bg-secondary rounded-lg '>
@@ -57,7 +58,7 @@ function Feedback({ params }) {
                         </Collapsible>
                     ))}
                 </>}
-            <Button onClick={() => router.replace('/dashboard')} className='mt-5'>Go Home</Button>
+            <Button onClick={() => router.replace('/dashboard')} className='mt-5'>Dashboard</Button>
         </div>
     )
 }

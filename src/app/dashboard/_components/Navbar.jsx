@@ -1,12 +1,13 @@
 'use client'
 import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
 
 function Navbar() {
-    
+
     const path = usePathname();
 
     const [nav, setNav] = useState(true);
@@ -26,16 +27,34 @@ function Navbar() {
             <Image src={'/logo.png'} width={40} height={40} alt="logo" className='ml-2' />
 
             <ul className='hidden md:flex md:gap-6 lg:gap-12'>
-                <li className={`text-xl hover:text-primary hover:font-bold transition-all cursor-pointer ${path == '/dashboard' && "text-primary font-bold"}`}>Dashboard</li>
-                <li className={`text-xl hover:text-primary hover:font-bold transition-all cursor-pointer ${path == '/dashboard/questions' && "text-primary font-bold"}`}>Questions</li>
-                <li className={`text-xl hover:text-primary hover:font-bold transition-all cursor-pointer ${path == '/dashboard/how' && "text-primary font-bold"}`}>How it Works?</li>
+                <Link href={'/dashboard'}>
+                    <li className={`text-xl hover:text-primary hover:font-bold transition-all cursor-pointer ${path == '/dashboard' && "text-primary font-bold"}`}>Dashboard</li>
+                </Link>
+
+                <Link href={'/practice'}>
+                    <li className={`text-xl hover:text-primary hover:font-bold transition-all cursor-pointer ${path == '/practice' && "text-primary font-bold"}`}>Practice</li>
+                </Link>
+
+                <Link href={'/how'}>
+                    <li className={`text-xl hover:text-primary hover:font-bold transition-all cursor-pointer ${path == '/how' && "text-primary font-bold"}`}>How it Works?</li>
+                </Link>
+
             </ul>
 
             <div className={!nav ? 'fixed left-0 top-0 w-[60%] md:w-0 h-full border-r border-r-gray-500 bg-secondary ease-in-out duration-500' : 'hidden'}>
                 <ul className='md:hidden uppercase'>
-                    <li className={`hover:bg-gray-700 hover:font-bold transition-all cursor-pointer p-6 ${path == '/dashboard' && "text-primary bg-white font-bold"}`}>Dashboard</li>
-                    <li className={`hover:bg-gray-700 hover:font-bold transition-all cursor-pointer p-6 ${path == '/dashboard/questions' && "text-primary bg-white font-bold"}`}>Questions</li>
-                    <li className={`hover:bg-gray-700 hover:font-bold transition-all cursor-pointer p-6 ${path == '/dashboard/how' && "text-primary bg-white font-bold"}`}>How it Works?</li>
+                    <Link href={'/dashboard'}>
+                        <li className={`hover:bg-gray-700 hover:font-bold transition-all cursor-pointer p-6 ${path == '/dashboard' && "text-primary bg-white font-bold"}`}>Dashboard</li>
+                    </Link>
+                    
+                    <Link href={'/practice'}>
+                        <li className={`hover:bg-gray-700 hover:font-bold transition-all cursor-pointer p-6 ${path == '/practice' && "text-primary bg-white font-bold"}`}>Practice</li>
+                    </Link>
+                    
+                    <Link href={'/how'}>
+                        <li className={`hover:bg-gray-700 hover:font-bold transition-all cursor-pointer p-6 ${path == '/how' && "text-primary bg-white font-bold"}`}>How it Works?</li>
+                    </Link>
+                    
                 </ul>
             </div>
 

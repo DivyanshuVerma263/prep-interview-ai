@@ -44,7 +44,7 @@ function RecordAnswerSection({ interviewQuestions, activeQuestionIndex, intervie
 
         setLoading(true);
 
-        const feedBackPrompt = "Question: " + interviewQuestions[activeQuestionIndex]?.question + ", User Answer: " + userAnswer + ", evaluate the user answer for the question provided and give us the rating for user answer and feedback as area of improvement if any in just 2 to 3 lines to improve it in JSON format with rating field and feedback field";
+        const feedBackPrompt = "Question: " + interviewQuestions[activeQuestionIndex]?.question + ", User Answer: " + userAnswer + ", evaluate the user answer for the question provided and give the rating for user answer out of 10 and feedback as area of improvement if any in just 2 to 3 lines to improve it in JSON format with rating field and feedback field";
 
         const result = await chatSession.sendMessage(feedBackPrompt);
         const data = await result.response.text().replace('```json', '').replace(/```[\s\S]*$/, '');
@@ -76,11 +76,6 @@ function RecordAnswerSection({ interviewQuestions, activeQuestionIndex, intervie
         if (!isRecording && userAnswer.length > 10) {
             saveUserAnswer();
         }
-        // if (userAnswer?.length < 10) {
-        //     setLoading(false);
-        //     toast('Error while saving your answer, please record again.');
-        //     return;
-        // }
     }, [userAnswer]);
 
     useEffect(() => {

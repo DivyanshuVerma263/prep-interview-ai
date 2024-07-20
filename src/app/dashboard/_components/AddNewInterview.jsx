@@ -26,7 +26,7 @@ function AddNewInterview() {
     const [openDialog, setOpenDialog] = useState(false);
     const [jobPosition, setJobPosition] = useState(false);
     const [jobDescription, setJobDescription] = useState(false);
-    const [jobExperience, setJobExperience] = useState(false);
+    const [jobExperience, setJobExperience] = useState(0);
     const [loading, setLoading] = useState(false);
     const [responseFromGeminiAI, setResponseFromGeminiAI] = useState([]);
     const { user } = useUser();
@@ -87,16 +87,16 @@ function AddNewInterview() {
                                     <h2>Add details about job position, your skills and years of experience</h2>
 
                                     <div className='mt-7 my-3'>
-                                        <label>Job Position/Job Role</label>
-                                        <Input placeholder='Eg. Full Stack Developer' required onChange={(e) => setJobPosition(e.target.value)} />
+                                        <label className='font-bold text-base'>Job Position/Job Role</label>
+                                        <Input placeholder='Eg. Full Stack Developer' required onChange={(e) => setJobPosition(e.target.value)} className='text-black dark:text-white' />
                                     </div>
                                     <div className='my-3'>
-                                        <label>Job Description/Tech Stack(in short)</label>
-                                        <Textarea placeholder='Eg. HTML, React, NextJS' required onChange={(e) => setJobDescription(e.target.value)} />
+                                        <label className='font-bold text-base'>Job Description/Tech Stack(in short)</label>
+                                        <Textarea placeholder='Eg. HTML, React, NextJS' required onChange={(e) => setJobDescription(e.target.value)} className='text-black dark:text-white' />
                                     </div>
                                     <div className='my-3'>
-                                        <label>Years of Experience</label>
-                                        <Input placeholder='Eg. 5' type='number' max='50' required onChange={(e) => setJobExperience(e.target.value)} />
+                                        <label className='font-bold text-base'>Years of Experience</label>
+                                        <Input placeholder='Eg. 5' type='number' max='50' required onChange={(e) => setJobExperience(e.target.value)} className='text-black dark:text-white' />
                                     </div>
 
                                 </div>

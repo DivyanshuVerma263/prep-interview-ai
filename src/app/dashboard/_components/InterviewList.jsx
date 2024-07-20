@@ -22,7 +22,7 @@ function InterviewList() {
         user && getInterviewList();
     }, [user]);
 
-    return (
+    return interviewList && (
         <div>
 
             <h2 className=' font-medium text-xl'>Previous Interviews</h2>
@@ -33,6 +33,7 @@ function InterviewList() {
                         <InterviewItemCard
                             key={index}
                             interview={interview}
+                            setInterviewList={setInterviewList}
                         />
                     ))}
             </div>
