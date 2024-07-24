@@ -1,14 +1,11 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Button } from "@/components/ui/button";
 import { UserButton, useUser } from "@clerk/nextjs";
+import ModeToggle from "@/components/ThemeToggle";
 
 export default function Home() {
-  const path = usePathname();
   const { user } = useUser();
   const frequentlyAskedQuestions = [
     {
@@ -32,25 +29,20 @@ export default function Home() {
       answer: "Yes, our AI provides detailed feedback on your answers to help you improve."
     }];
 
-  const [nav, setNav] = useState(true);
-
-  // Toggle function to handle the navbar's display
-  const handleNav = () => {
-    setNav(!nav);
-  };
-
   return (
     <main className="flex flex-col w-full h-max">
 
       {/* Navbar */}
-      <div className="h-16 w-full flex justify-between items-center p-2 bg-secondary mb-5 sticky top-0">
 
+      <div className="h-16 w-full flex justify-between items-center p-2 bg-secondary mb-5 sticky top-0">
         <Link href={'/'}>
           <Image src={'/logo.png'} width={40} height={40} alt="logo" className='ml-2' />
         </Link>
-
         {!user ?
-          <div className="flex">
+          <div className="flex gap-1 sm:gap-3 lg:gap-3">
+            <div>
+              <ModeToggle />
+            </div>
             <Link href={'/dashboard'}>
               <Button className='hidden sm:block bg-primary'>Dashboard</Button>
             </Link>
@@ -62,17 +54,19 @@ export default function Home() {
             </Link>
           </div>
           :
-          <>
-            <div className="flex justify-center gap-3 ">
-
-              <Link href={'/dashboard'}>
-                <Button className='bg-primary'>Dashboard</Button>
-              </Link>
-              <UserButton />
-            </div>
-          </>}
-
+          <div className="flex justify-center gap-3 ">
+            <ModeToggle />
+            <Link href={'/dashboard'}>
+              <Button className='bg-primary'>Dashboard</Button>
+            </Link>
+            <UserButton />
+          </div>
+        }
       </div>
+
+
+      
+      {/* main section */}
 
       <div className="flex flex-col sm:flex-row-reverse justify-center items-center sm:items-start mb-5">
         <div className="flex flex-col items-center justify-center p-2">
@@ -98,12 +92,9 @@ export default function Home() {
           </div>
 
           <div className="md:flex md:flex-row-reverse md:justify-evenly">
-
             <div className="md:w-1/2 flex justify-center items-center p-5 ">
-
               <Image src={'/landing_image.png'} height={288} width={288} alt='logo' className="md:w-full md:h-full my-5 rounded-lg shadow-xl dark:shadow-lg dark:shadow-slate-300" />
             </div>
-
             <div className="md:w-1/2 px-5 lg:px-16 py-3 flex justify-center items-center text-center md:text-xl lg:text-2xl ">
               Get ready for your interview with our AI tool that customizes practice based on your job role, description, and experience.
             </div>
@@ -112,12 +103,13 @@ export default function Home() {
       </div>
 
 
+      {/* Banner */}
 
       <div className="w-full min-h-96 p-6 md:p-12 lg:p-24 bg-primary text-white">
         <h2 className="text-[26px] xl:text-[34px] px-2">
           Build the career you deserve
         </h2>
-        
+
         <h3 className="ml-2 text-[18px] md:text-[22px] lg:text-[26px] mt-10">Practice Questions</h3>
         <div className="md:flex md:flex-row md:justify-evenly mb-16">
           <div className="md:w-[60%] flex justify-center items-center p-2 ">
@@ -156,6 +148,8 @@ export default function Home() {
         </div>
       </div>
 
+
+      {/* Frequently asked questions */}
 
       <div className="w-full min-h-96 p-6 ">
         <h2 className="mt-2 md:mx-6 md:mt-4 lg:mx-16 lg:mt-12 text-[26px] xl:text-[34px]">
