@@ -11,9 +11,11 @@ import {
 import { ChevronsUpDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
+import { useUser } from '@clerk/nextjs'
 
 
 function Feedback({ params }) {
+    const {user}=useUser();
     const router = useRouter();
     const [feedbackList, setFeedbackList] = useState([]);
 
@@ -28,8 +30,8 @@ function Feedback({ params }) {
     }
 
     useEffect(() => {
-        getFeedback();
-    }, []);
+        user && getFeedback();
+    }, [user]);
 
     return (
         <div className='p-10 '>
