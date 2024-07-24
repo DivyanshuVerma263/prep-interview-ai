@@ -49,7 +49,7 @@ function InterviewPage({ params }) {
                             <Lightbulb className='dark:text-noteyellow' />
                             <strong>Note:</strong>
                         </h2>
-                        <h2 className='mt-3 text-yellow-500'>Information Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quod quam aliquid sunt sint? Veniam rerum inventore amet quis nisi expedita doloribus. Quae provident eligendi consectetur incidunt, hic necessitatibus sunt!</h2>
+                        <h2 className='mt-3 text-yellow-500'>Enable Video Web Cam and Microphone to start your AI generated Interview. It consists of 5 questions which you can answer and on completion of the interview, you get the feedback on the basis of your answers. NOTE: We never record your video. You can disable your webcam at any time if you want. </h2>
                     </div>
 
                 </div>

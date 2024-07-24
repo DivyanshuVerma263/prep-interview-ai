@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { db } from '@/helpers/db';
 import { Interview } from '@/helpers/schema';
+import { useUser } from '@clerk/nextjs';
 import { eq } from 'drizzle-orm';
 import { Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation'
@@ -8,10 +9,11 @@ import React from 'react'
 
 function InterviewItemCard({ interview, setInterviewList }) {
   const router = useRouter();
+  const { user } = useUser();
 
   const deleteInterview = async () => {
     await db.delete(Interview).where(eq(Interview.interviewId, interview.interviewId));
-    const dataAfterDeleting = await db.select().from(Interview);
+    const dataAfterDeleting = await db.select().from(Interview).where(eq(user?.primaryEmailAddress?.emailAddress, Interview.createdBy));
     setInterviewList(dataAfterDeleting);
   }
 

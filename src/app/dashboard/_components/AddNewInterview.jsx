@@ -24,8 +24,8 @@ import { useRouter } from 'next/navigation';
 
 function AddNewInterview() {
     const [openDialog, setOpenDialog] = useState(false);
-    const [jobPosition, setJobPosition] = useState(false);
-    const [jobDescription, setJobDescription] = useState(false);
+    const [jobPosition, setJobPosition] = useState('');
+    const [jobDescription, setJobDescription] = useState('');
     const [jobExperience, setJobExperience] = useState(0);
     const [loading, setLoading] = useState(false);
     const [responseFromGeminiAI, setResponseFromGeminiAI] = useState([]);

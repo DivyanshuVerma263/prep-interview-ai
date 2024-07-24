@@ -24,7 +24,9 @@ function Navbar() {
                 {nav ? <AiOutlineMenu size={20} /> : <AiOutlineClose size={20} />}
             </div>
 
-            <Image src={'/logo.png'} width={40} height={40} alt="logo" className='ml-2' />
+            <Link href={'/'}>
+                <Image src={'/logo.png'} width={40} height={40} alt="logo" className='ml-2' />
+            </Link>
 
             <ul className='hidden md:flex md:gap-6 lg:gap-12'>
                 <Link href={'/dashboard'}>
@@ -46,15 +48,15 @@ function Navbar() {
                     <Link href={'/dashboard'}>
                         <li className={`hover:bg-gray-700 hover:font-bold transition-all cursor-pointer p-6 ${path == '/dashboard' && "text-primary bg-white font-bold"}`}>Dashboard</li>
                     </Link>
-                    
+
                     <Link href={'/practice'}>
                         <li className={`hover:bg-gray-700 hover:font-bold transition-all cursor-pointer p-6 ${path == '/practice' && "text-primary bg-white font-bold"}`}>Practice</li>
                     </Link>
-                    
+
                     <Link href={'/how'}>
                         <li className={`hover:bg-gray-700 hover:font-bold transition-all cursor-pointer p-6 ${path == '/how' && "text-primary bg-white font-bold"}`}>How it Works?</li>
                     </Link>
-                    
+
                 </ul>
             </div>
 
