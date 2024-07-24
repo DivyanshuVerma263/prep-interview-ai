@@ -20,7 +20,7 @@ function QuestionsSection({ interviewQuestions, activeQuestionIndex }) {
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {interviewQuestions &&
                     interviewQuestions.map((question, index) => (
-                        <h2 className={`${activeQuestionIndex == index && 'bg-[#3576DF] text-white'} p-2 border border-gray-400 rounded-lg xl:rounded-full text-xs md:text-sm text-center cursor-pointer `}>Question #{index + 1}</h2>
+                        <h2 key={index} className={`${activeQuestionIndex == index && 'bg-[#3576DF] text-white'} p-2 border border-gray-400 rounded-lg xl:rounded-full text-xs md:text-sm text-center cursor-pointer `}>Question #{index + 1}</h2>
                     ))}
             </div>
 
